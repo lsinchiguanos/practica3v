@@ -35,11 +35,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void stringRequest() {
-        HashMap<String, String> headerParams = new HashMap<>();
-        headerParams.put("Public-Merchant-Id", "84e1d0de1fbf437e9779fd6a52a9ca18");
-
-
-        StringRequest sr = new StringRequest(Request.Method.GET, url,
+        StringRequest sr = new StringRequest(
+                Request.Method.GET,
+                url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
