@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
+        requestQueue.add(request);
     }
 
     private void stringRequest() {
