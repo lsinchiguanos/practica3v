@@ -3,6 +3,7 @@ package com.example.practica3v;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -34,30 +35,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void stringRequest() {
-        StringRequest request = new StringRequest(
-                Request.Method.GET,
-                url,
+        HashMap<String, String> headerParams = new HashMap<>();
+        headerParams.put("Public-Merchant-Id", "84e1d0de1fbf437e9779fd6a52a9ca18");
+
+
+        StringRequest sr = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        textView.setText(response);
+                        Log.e("HttpClient", "success! response: " + response.toString());
                     }
                 },
-                new Response.ErrorListener(){
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.e("HttpClient", "error: " + error.toString());
                     }
-                }
-        ){
+                })
+        {
+            /*@Override*/
+            /*protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Public-Merchant-Id","84e1d0de1fbf437e9779fd6a52a9ca18");
+                return params;
+            }*/
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  params = new HashMap<String, String>();
-                params.put("Public-Merchant-Id", "84e1d0de1fbf437e9779fd6a52a9ca18");
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Public-Merchant-Id","84e1d0de1fbf437e9779fd6a52a9ca18");
                 return params;
             }
         };
-        requestQueue.add(request);
+        requestQueue.add(sr);
     }
 
 }
